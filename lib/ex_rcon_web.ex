@@ -27,6 +27,8 @@ defmodule ExRconWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
+
+      import ExRconWeb.UserAuth
     end
   end
 
@@ -54,6 +56,15 @@ defmodule ExRconWeb do
     quote do
       use Phoenix.LiveView,
         layout: {ExRconWeb.Layouts, :app}
+
+      unquote(html_helpers())
+    end
+  end
+
+  def public_live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {ExRconWeb.Layouts, :public}
 
       unquote(html_helpers())
     end
