@@ -1,33 +1,33 @@
-defmodule ExRCONWeb.CoreComponents do
+defmodule ExRconWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
-
+  
   The components in this module use Tailwind CSS, a utility-first CSS framework.
   See the [Tailwind CSS documentation](https://tailwindcss.com) to learn how to
   customize the generated components in this module.
-
+  
   Icons are provided by [heroicons](https://heroicons.com), using the
   [heroicons_elixir](https://github.com/mveytsman/heroicons_elixir) project.
   """
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import ExRCONWeb.Gettext
+  import ExRconWeb.Gettext
 
   @doc """
   Renders a modal.
-
+  
   ## Examples
-
+  
       <.modal id="confirm-modal">
         Are you sure?
         <:confirm>OK</:confirm>
         <:cancel>Cancel</:cancel>
       </.modal>
-
+  
   JS commands may be passed to the `:on_cancel` and `on_confirm` attributes
   for the caller to react to each button press, for example:
-
+  
       <.modal id="confirm" on_confirm={JS.push("delete")} on_cancel={JS.navigate(~p"/posts")}>
         Are you sure you?
         <:confirm>OK</:confirm>
@@ -77,16 +77,18 @@ defmodule ExRCONWeb.CoreComponents do
                   <Heroicons.x_mark solid class="h-5 w-5 stroke-current" />
                 </button>
               </div>
+              
               <div id={"#{@id}-content"}>
                 <header :if={@title != []}>
                   <h1 id={"#{@id}-title"} class="text-lg font-semibold leading-8 text-zinc-800">
                     <%= render_slot(@title) %>
                   </h1>
+                  
                   <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
                     <%= render_slot(@subtitle) %>
                   </p>
                 </header>
-                <%= render_slot(@inner_block) %>
+                 <%= render_slot(@inner_block) %>
                 <div :if={@confirm != [] or @cancel != []} class="ml-6 mb-4 flex items-center gap-5">
                   <.button
                     :for={confirm <- @confirm}
@@ -97,6 +99,7 @@ defmodule ExRCONWeb.CoreComponents do
                   >
                     <%= render_slot(confirm) %>
                   </.button>
+                  
                   <.link
                     :for={cancel <- @cancel}
                     phx-click={hide_modal(@on_cancel, @id)}
@@ -116,9 +119,9 @@ defmodule ExRCONWeb.CoreComponents do
 
   @doc """
   Renders flash notices.
-
+  
   ## Examples
-
+  
       <.flash kind={:info} flash={@flash} />
       <.flash kind={:info} phx-mounted={show("#flash")}>Welcome Back!</.flash>
   """
@@ -149,10 +152,11 @@ defmodule ExRCONWeb.CoreComponents do
     >
       <p :if={@title} class="flex items-center gap-1.5 text-[0.8125rem] font-semibold leading-6">
         <Heroicons.information_circle :if={@kind == :info} mini class="h-4 w-4" />
-        <Heroicons.exclamation_circle :if={@kind == :error} mini class="h-4 w-4" />
-        <%= @title %>
+        <Heroicons.exclamation_circle :if={@kind == :error} mini class="h-4 w-4" /> <%= @title %>
       </p>
+      
       <p class="mt-2 text-[0.8125rem] leading-5"><%= msg %></p>
+      
       <button
         :if={@close}
         type="button"
@@ -167,9 +171,9 @@ defmodule ExRCONWeb.CoreComponents do
 
   @doc """
   Renders a simple form.
-
+  
   ## Examples
-
+  
       <.simple_form :let={f} for={:user} phx-change="validate" phx-submit="save">
         <.input field={{f, :email}} label="Email"/>
         <.input field={{f, :username}} label="Username" />
@@ -203,9 +207,9 @@ defmodule ExRCONWeb.CoreComponents do
 
   @doc """
   Renders a button.
-
+  
   ## Examples
-
+  
       <.button>Send!</.button>
       <.button phx-click="go" class="ml-2">Send!</.button>
   """
@@ -233,13 +237,13 @@ defmodule ExRCONWeb.CoreComponents do
 
   @doc """
   Renders an input with label and error messages.
-
+  
   A `%Phoenix.HTML.Form{}` and field name may be passed to the input
   to build input names and error messages, or all the attributes and
   errors may be passed explicitly.
-
+  
   ## Examples
-
+  
       <.input field={{f, :email}} type="email" />
       <.input name="my-input" errors={["oh no!"]} />
   """
@@ -290,8 +294,7 @@ defmodule ExRCONWeb.CoreComponents do
         checked={@checked}
         class="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
         {@rest}
-      />
-      <%= @label %>
+      /> <%= @label %>
     </label>
     """
   end
@@ -300,6 +303,7 @@ defmodule ExRCONWeb.CoreComponents do
     ~H"""
     <div phx-feedback-for={@name}>
       <.label for={@id}><%= @label %></.label>
+      
       <select
         id={@id}
         name={@name}
@@ -308,8 +312,9 @@ defmodule ExRCONWeb.CoreComponents do
         {@rest}
       >
         <option :if={@prompt} value=""><%= @prompt %></option>
-        <%= Phoenix.HTML.Form.options_for_select(@options, @value) %>
+         <%= Phoenix.HTML.Form.options_for_select(@options, @value) %>
       </select>
+      
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
     """
@@ -319,7 +324,7 @@ defmodule ExRCONWeb.CoreComponents do
     ~H"""
     <div phx-feedback-for={@name}>
       <.label for={@id}><%= @label %></.label>
-      <textarea
+       <textarea
         id={@id || @name}
         name={@name}
         class={[
@@ -330,7 +335,7 @@ defmodule ExRCONWeb.CoreComponents do
         ]}
         {@rest}
       >
-
+    
     <%= @value %></textarea>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
@@ -341,6 +346,7 @@ defmodule ExRCONWeb.CoreComponents do
     ~H"""
     <div phx-feedback-for={@name}>
       <.label for={@id}><%= @label %></.label>
+      
       <input
         type={@type}
         name={@name}
@@ -387,8 +393,9 @@ defmodule ExRCONWeb.CoreComponents do
   def error(assigns) do
     ~H"""
     <p class="phx-no-feedback:hidden mt-3 flex gap-3 text-sm leading-6 text-rose-600">
-      <Heroicons.exclamation_circle mini class="mt-0.5 h-5 w-5 flex-none fill-rose-500" />
-      <%= render_slot(@inner_block) %>
+      <Heroicons.exclamation_circle mini class="mt-0.5 h-5 w-5 flex-none fill-rose-500" /> <%= render_slot(
+        @inner_block
+      ) %>
     </p>
     """
   end
@@ -409,10 +416,12 @@ defmodule ExRCONWeb.CoreComponents do
         <h1 class="text-lg font-semibold leading-8 text-zinc-800">
           <%= render_slot(@inner_block) %>
         </h1>
+        
         <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
           <%= render_slot(@subtitle) %>
         </p>
       </div>
+      
       <div class="flex-none"><%= render_slot(@actions) %></div>
     </header>
     """
@@ -420,9 +429,9 @@ defmodule ExRCONWeb.CoreComponents do
 
   @doc ~S"""
   Renders a table with generic styling.
-
+  
   ## Examples
-
+  
       <.table id="users" rows={@users}>
         <:col :let={user} label="id"><%= user.id %></:col>
         <:col :let={user} label="username"><%= user.username %></:col>
@@ -445,9 +454,11 @@ defmodule ExRCONWeb.CoreComponents do
         <thead class="text-left text-[0.8125rem] leading-6 text-zinc-500">
           <tr>
             <th :for={col <- @col} class="p-0 pb-4 pr-6 font-normal"><%= col[:label] %></th>
+            
             <th class="relative p-0 pb-4"><span class="sr-only"><%= gettext("Actions") %></span></th>
           </tr>
         </thead>
+        
         <tbody class="relative divide-y divide-zinc-100 border-t border-zinc-200 text-sm leading-6 text-zinc-700">
           <tr
             :for={row <- @rows}
@@ -463,12 +474,14 @@ defmodule ExRCONWeb.CoreComponents do
                 <span class="absolute h-full w-4 top-0 -left-4 group-hover:bg-zinc-50 sm:rounded-l-xl" />
                 <span class="absolute h-full w-4 top-0 -right-4 group-hover:bg-zinc-50 sm:rounded-r-xl" />
               </div>
+              
               <div class="block py-4 pr-6">
                 <span class={["relative", i == 0 && "font-semibold text-zinc-900"]}>
                   <%= render_slot(col, row) %>
                 </span>
               </div>
             </td>
+            
             <td :if={@action != []} class="p-0 w-14">
               <div class="relative whitespace-nowrap py-4 text-right text-sm font-medium">
                 <span
@@ -488,9 +501,9 @@ defmodule ExRCONWeb.CoreComponents do
 
   @doc """
   Renders a data list.
-
+  
   ## Examples
-
+  
       <.list>
         <:item title="Title"><%= @post.title %></:item>
         <:item title="Views"><%= @post.views %></:item>
@@ -506,6 +519,7 @@ defmodule ExRCONWeb.CoreComponents do
       <dl class="-my-4 divide-y divide-zinc-100">
         <div :for={item <- @item} class="flex gap-4 py-4 sm:gap-8">
           <dt class="w-1/4 flex-none text-[0.8125rem] leading-6 text-zinc-500"><%= item.title %></dt>
+          
           <dd class="text-sm leading-6 text-zinc-700"><%= render_slot(item) %></dd>
         </div>
       </dl>
@@ -515,9 +529,9 @@ defmodule ExRCONWeb.CoreComponents do
 
   @doc """
   Renders a back navigation link.
-
+  
   ## Examples
-
+  
       <.back navigate={~p"/posts"}>Back to posts</.back>
   """
   attr :navigate, :any, required: true
@@ -530,8 +544,9 @@ defmodule ExRCONWeb.CoreComponents do
         navigate={@navigate}
         class="text-sm font-semibold leading-6 text-zinc-900 hover:text-zinc-700"
       >
-        <Heroicons.arrow_left solid class="w-3 h-3 stroke-current inline" />
-        <%= render_slot(@inner_block) %>
+        <Heroicons.arrow_left solid class="w-3 h-3 stroke-current inline" /> <%= render_slot(
+          @inner_block
+        ) %>
       </.link>
     </div>
     """
@@ -604,9 +619,9 @@ defmodule ExRCONWeb.CoreComponents do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(ExRCONWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(ExRconWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(ExRCONWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(ExRconWeb.Gettext, "errors", msg, opts)
     end
   end
 

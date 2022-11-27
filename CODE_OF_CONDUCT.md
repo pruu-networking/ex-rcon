@@ -1,6 +1,6 @@
 # Code of Conduct
 
-The ExRCON code of conduct is derived from the Ruby code of conduct. Any violations of the code of conduct may be reported to Alexandre de Souza via [alexandre@aledsz.com.br](mailto:alexandre@aledsz.com.br):
+The ExRcon code of conduct is derived from the Ruby code of conduct. Any violations of the code of conduct may be reported to Alexandre de Souza via [alexandre@aledsz.com.br](mailto:alexandre@aledsz.com.br):
 
 - Participants will be tolerant of opposing views.
 - Participants must ensure that their language and actions are free of personal attacks and disparaging personal remarks.

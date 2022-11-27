@@ -8,16 +8,16 @@
 import Config
 
 config :ex_rcon,
-  ecto_repos: [ExRCON.Repo]
+  ecto_repos: [ExRcon.Repo]
 
 # Configures the endpoint
-config :ex_rcon, ExRCONWeb.Endpoint,
+config :ex_rcon, ExRconWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: ExRCONWeb.ErrorHTML, json: ExRCONWeb.ErrorJSON],
+    formats: [html: ExRconWeb.ErrorHTML, json: ExRconWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: ExRCON.PubSub,
+  pubsub_server: ExRcon.PubSub,
   live_view: [signing_salt: "CyQD4k0p"]
 
 # Configures the mailer
@@ -27,7 +27,7 @@ config :ex_rcon, ExRCONWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :ex_rcon, ExRCON.Mailer, adapter: Swoosh.Adapters.Local
+config :ex_rcon, ExRcon.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,

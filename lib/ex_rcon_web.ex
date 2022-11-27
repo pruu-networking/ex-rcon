@@ -1,17 +1,17 @@
-defmodule ExRCONWeb do
+defmodule ExRconWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
-
+  
   This can be used in your application as:
-
-      use ExRCONWeb, :controller
-      use ExRCONWeb, :html
-
+  
+      use ExRconWeb, :controller
+      use ExRconWeb, :html
+  
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
   on imports, uses and aliases.
-
+  
   Do NOT define functions inside the quoted expressions
   below. Instead, define additional modules and import
   those modules here.
@@ -39,12 +39,12 @@ defmodule ExRCONWeb do
   def controller do
     quote do
       use Phoenix.Controller,
-        namespace: ExRCONWeb,
+        namespace: ExRconWeb,
         formats: [:html, :json],
-        layouts: [html: ExRCONWeb.Layouts]
+        layouts: [html: ExRconWeb.Layouts]
 
       import Plug.Conn
-      import ExRCONWeb.Gettext
+      import ExRconWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -53,7 +53,7 @@ defmodule ExRCONWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {ExRCONWeb.Layouts, :app}
+        layout: {ExRconWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
@@ -85,8 +85,8 @@ defmodule ExRCONWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
-      import ExRCONWeb.CoreComponents
-      import ExRCONWeb.Gettext
+      import ExRconWeb.CoreComponents
+      import ExRconWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
@@ -99,9 +99,9 @@ defmodule ExRCONWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: ExRCONWeb.Endpoint,
-        router: ExRCONWeb.Router,
-        statics: ExRCONWeb.static_paths()
+        endpoint: ExRconWeb.Endpoint,
+        router: ExRconWeb.Router,
+        statics: ExRconWeb.static_paths()
     end
   end
 

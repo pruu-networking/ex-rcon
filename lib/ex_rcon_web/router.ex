@@ -1,11 +1,11 @@
-defmodule ExRCONWeb.Router do
-  use ExRCONWeb, :router
+defmodule ExRconWeb.Router do
+  use ExRconWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {ExRCONWeb.Layouts, :root}
+    plug :put_root_layout, {ExRconWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -14,14 +14,14 @@ defmodule ExRCONWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", ExRCONWeb do
+  scope "/", ExRconWeb do
     pipe_through :browser
 
     get "/", PageController, :home
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", ExRCONWeb do
+  # scope "/api", ExRconWeb do
   #   pipe_through :api
   # end
 
@@ -37,7 +37,7 @@ defmodule ExRCONWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: ExRCONWeb.Telemetry
+      live_dashboard "/dashboard", metrics: ExRconWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end

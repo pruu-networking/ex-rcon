@@ -1,5 +1,5 @@
-defmodule ExRCONWeb.PageControllerTest do
-  use ExRCONWeb.ConnCase
+defmodule ExRconWeb.PageControllerTest do
+  use ExRconWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

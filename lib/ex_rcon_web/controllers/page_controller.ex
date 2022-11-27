@@ -1,5 +1,5 @@
-defmodule ExRCONWeb.PageController do
-  use ExRCONWeb, :controller
+defmodule ExRconWeb.PageController do
+  use ExRconWeb, :controller
 
   def home(conn, _params) do
     # The home page is often custom made,

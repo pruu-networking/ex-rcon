@@ -1,5 +1,5 @@
-defmodule ExRCONWeb.ErrorHTML do
-  use ExRCONWeb, :html
+defmodule ExRconWeb.ErrorHTML do
+  use ExRconWeb, :html
 
   # If you want to customize your error pages,
   # uncomment the embed_templates/1 call below

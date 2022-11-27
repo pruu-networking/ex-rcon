@@ -1,4 +1,4 @@
-defmodule ExRCON.MixProject do
+defmodule ExRcon.MixProject do
   use Mix.Project
 
   def project do
@@ -15,7 +15,7 @@ defmodule ExRCON.MixProject do
 
   def application do
     [
-      mod: {ExRCON.Application, []},
+      mod: {ExRcon.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

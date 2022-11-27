@@ -1,16 +1,16 @@
-defmodule ExRCON.DataCase do
+defmodule ExRcon.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
-
+  
   You may define functions here to be used as helpers in
   your tests.
-
+  
   Finally, if the test case interacts with the database,
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use ExRCON.DataCase, async: true`, although
+  by setting `use ExRcon.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,17 +18,17 @@ defmodule ExRCON.DataCase do
 
   using do
     quote do
-      alias ExRCON.Repo
+      alias ExRcon.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import ExRCON.DataCase
+      import ExRcon.DataCase
     end
   end
 
   setup tags do
-    ExRCON.DataCase.setup_sandbox(tags)
+    ExRcon.DataCase.setup_sandbox(tags)
     :ok
   end
 
@@ -36,17 +36,17 @@ defmodule ExRCON.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(ExRCON.Repo, shared: not tags[:async])
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(ExRcon.Repo, shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 
   @doc """
   A helper that transforms changeset errors into a map of messages.
-
+  
       assert {:error, changeset} = Accounts.create_user(%{password: "short"})
       assert "password is too short" in errors_on(changeset).password
       assert %{password: ["password is too short"]} = errors_on(changeset)
-
+  
   """
   def errors_on(changeset) do
     Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->

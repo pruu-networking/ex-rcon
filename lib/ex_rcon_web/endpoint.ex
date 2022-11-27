@@ -1,4 +1,4 @@
-defmodule ExRCONWeb.Endpoint do
+defmodule ExRconWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :ex_rcon
 
   # The session will be stored in the cookie and signed,
@@ -21,7 +21,7 @@ defmodule ExRCONWeb.Endpoint do
     at: "/",
     from: :ex_rcon,
     gzip: false,
-    only: ExRCONWeb.static_paths()
+    only: ExRconWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -47,5 +47,5 @@ defmodule ExRCONWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug ExRCONWeb.Router
+  plug ExRconWeb.Router
 end

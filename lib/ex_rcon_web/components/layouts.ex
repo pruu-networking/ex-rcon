@@ -1,5 +1,5 @@
-defmodule ExRCONWeb.Layouts do
-  use ExRCONWeb, :html
+defmodule ExRconWeb.Layouts do
+  use ExRconWeb, :html
 
   embed_templates "layouts/*"
 end
